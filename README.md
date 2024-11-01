@@ -1,2 +1,2 @@
 # Typescript-Niklas
-Indivuduell uppgift i typecript.
+Indivuduell uppgift i typescript.
