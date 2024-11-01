@@ -14,7 +14,7 @@ async function fetchRandomJoke(): Promise<void> {
             throw new Error('Someting went wrong, could not fetch the joke.');
         }
         const data: { joke: string } = await response.json();
-        const contentRef: HTMLElement | null = document.querySelector('#giggleContent');
+        const contentRef: HTMLElement | null = document.querySelector('#giggleContent') as HTMLElement;
         if (contentRef) {
             contentRef.innerText = data.joke;
         }
