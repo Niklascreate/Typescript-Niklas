@@ -9,9 +9,15 @@ async function fetchRandomJoke(): Promise<void> {
     const apiKey: string = 'c622bc16f7a44bea9ec5b1b5f82431ac';
 
     try {
-        const response: Response = await fetch(`${apiUrl}?key=${apiKey}`);
+        const response: Response = await fetch(`${apiUrl}?key=${apiKey}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log('Response:', response);
         if (!response.ok) {
-            throw new Error('Someting went wrong, could not fetch the joke.');
+            throw new Error('Something went wrong, could not fetch the joke.');
         }
         const data: { joke: string } = await response.json();
         const contentRef: HTMLElement | null = document.querySelector('#giggleContent') as HTMLElement;

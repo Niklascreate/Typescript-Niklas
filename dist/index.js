@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -16,9 +17,15 @@ function fetchRandomJoke() {
         const apiUrl = 'https://api.humorapi.com/jokes/random';
         const apiKey = 'c622bc16f7a44bea9ec5b1b5f82431ac';
         try {
-            const response = yield fetch(`${apiUrl}?key=${apiKey}`);
+            const response = yield fetch(`${apiUrl}?key=${apiKey}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            console.log('Response:', response);
             if (!response.ok) {
-                throw new Error('Someting went wrong, could not fetch the joke.');
+                throw new Error('Something went wrong, could not fetch the joke.');
             }
             const data = yield response.json();
             const contentRef = document.querySelector('#giggleContent');
