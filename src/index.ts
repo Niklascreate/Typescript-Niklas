@@ -13,10 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const weatherData = await fetchWeather(cityName);
             if (weatherData) {
                 renderWeatherData(weatherData);
+            } else {
+                alert('Could not fetch weather data. Please check the city name and try again.');
             }
+        } else {
+            alert('Please enter a city name to fetch weather data.');
         }
     });
 });
+
 
 async function fetchWeather(city: string): Promise<Weather | void> {
     try {
@@ -43,12 +48,11 @@ function renderWeatherData(data: Weather): void {
     if (contentRef) {
         const { location, current } = data;
         contentRef.innerHTML = `
-            <h2>Väder i ${location.name}, ${location.country}</h2>
-            <p><strong>Temperatur:</strong> ${current.temperature}°C</p>
-            <p><strong>Beskrivning:</strong> ${current.weather_descriptions.join(', ')}</p>
-            <p><strong>Vindhastighet:</strong> ${current.wind_speed} km/h</p>
-            <p><strong>Fuktighet:</strong> ${current.humidity}%</p>
-            <p><strong>Observerad tid:</strong> ${current.observation_time}</p>
+            <h2>${location.name}, ${location.country}</h2>
+            <p>Temperatur: ${current.temperature}°C</p>
+            <p>Vindhastighet: ${current.wind_speed} km/h</p>
+            <p>Fuktighet: ${current.humidity}%</p>
+            <p>Observerad tid: ${current.observation_time}</p>
             <button id="saveWeatherBtn" class="weather-btn">Spara till Weatherbank</button>
         `;
 

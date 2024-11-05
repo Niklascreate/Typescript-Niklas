@@ -3,19 +3,15 @@
     padding: 0;
     margin: 0;
 }
-
-body {
-    background-color: rgb(214, 214, 214);
-}
-
+    
 main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
-
 .header {
+    cursor: pointer;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -24,19 +20,25 @@ main {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    background: linear-gradient(to right, rgba(229, 254, 3, 0.8), rgba(255, 255, 255, 0.8));
+    font-family:'Times New Roman', Times, serif;
+    font-style: italic;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .header-title {
     font-size: 3rem;
     text-align: center;
+    animation: moveTitle 3s ease-in-out infinite;
 }
 
-.header-icon {
-    margin-right: 1rem;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    box-shadow: 2px 2px 10px black;
+@keyframes moveTitle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .nav-container {
@@ -54,8 +56,8 @@ main {
     position: relative;
     z-index: 10;
     margin: 0 auto;
+    background-color: rgb(249, 249, 249);
 }
-
 
 .nav-container ul {
     display: flex;
@@ -71,7 +73,6 @@ main {
 }
 
 
-
 .weather-wrapper {
     max-width: 1200px;
     width: 100%;
@@ -83,7 +84,6 @@ main {
     padding-top: 2rem;
     margin: 0 auto;
 }
-
 
 .weather-btn {
     padding: 0.5rem;
@@ -99,7 +99,6 @@ main {
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3), 
                 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
-
 
 .weather-content {
     margin-top: 1rem;
@@ -132,7 +131,12 @@ main {
     align-items: center;
 }
 
+/* Väder korten */
 #savedWeatherContent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
@@ -140,19 +144,42 @@ main {
     
 }
 
+/* .bin {
+    height: 20px;
+    width: 20px;
+} */
+
 .weather-card {
     width: 200px;
     height: 200px;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    aspect-ratio: 1;
     background-image: url(../dist/weather-cardImg.jpg);
-    background-size: cover; /* eller contain */
+    background-size: cover;
     background-position: center;
-    background-repeat: no-repeat; /* Förhindrar upprepning av bakgrundsbilden */
+    background-repeat: no-repeat;
     border-radius: 0.5rem;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), 
     0px 2px 5px rgba(0, 0, 0, 0.1);
     transition: 0.3s ease-in-out;
+    padding: 0.5rem;
 }
 
 .weather-card:hover {
     transform: scale(1.05);
+}
+
+.weather-location {
+    color: white;
+}
+
+.weather-temperature {
+    color: white;
+}
+
+.weather-description {
+    color: white;
+    font-style: italic;
 }
