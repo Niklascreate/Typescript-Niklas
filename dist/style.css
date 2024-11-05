@@ -20,16 +20,45 @@ main {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    background: linear-gradient(to right, rgba(229, 254, 3, 0.8), rgba(255, 255, 255, 0.8));
+    /* background: linear-gradient(to right, rgba(229, 254, 3, 0.5), rgba(255, 255, 255, 0.8)); */
     font-family:'Times New Roman', Times, serif;
     font-style: italic;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header-smallTitle {
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+    animation: windyTitle 3s ease-in-out infinite;
 }
 
 .header-title {
+    position: relative;
+    z-index: 1;
     font-size: 3rem;
     text-align: center;
     animation: moveTitle 3s ease-in-out infinite;
+    color: white;
 }
 
 @keyframes moveTitle {
@@ -72,6 +101,22 @@ main {
     text-decoration: none;
 }
 
+.weather-bankTitle {
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out; /* Uppdaterad för att animera transform */
+}
+
+.weather-bankTitle:hover {
+    transform: scale(1.1);
+}
+
+.weather-bankTitle a {
+    color: black;
+    text-decoration: none;
+}
+
 
 .weather-wrapper {
     max-width: 1200px;
@@ -85,7 +130,31 @@ main {
     margin: 0 auto;
 }
 
+.input-container {
+    position: relative;
+    width: 500px;
+    margin: 1rem 0;
+}
+
+.save-btn {
+    margin-top: 2rem;
+    height: auto;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), 
+                0px 2px 5px rgba(0, 0, 0, 0.1);
+    
+}
+
 .weather-btn {
+    margin-top: 1rem;
+    position: absolute;
+    left: 50%;
+    top: 200%;
+    transform: translate(-50%, -50%);
+    height: auto;
     padding: 0.5rem;
     border-radius: 0.5rem;
     border: none;
@@ -95,23 +164,19 @@ main {
     transition: box-shadow 0.3s ease;
 }
 
+
 .weather-btn:hover {
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3), 
                 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.weather-content {
-    margin-top: 1rem;
-    width: 500px;
-    height: 500px;
-    background-color: white;
-}
-
 .weather-input {
+    width: 100%;
+    border: none;
+    text-align: center;
     border-radius: 0.5rem;
     margin-top: 1rem;
     height: 30px;
-    width: 300px;
     padding: 1rem;
     border: none;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), 
@@ -131,7 +196,7 @@ main {
     align-items: center;
 }
 
-/* Väder korten */
+/* Väder korten på weatherbank */
 #savedWeatherContent {
     display: flex;
     flex-wrap: wrap;
@@ -143,11 +208,6 @@ main {
     gap: 1rem;
     
 }
-
-/* .bin {
-    height: 20px;
-    width: 20px;
-} */
 
 .weather-card {
     width: 200px;
@@ -182,4 +242,54 @@ main {
 .weather-description {
     color: white;
     font-style: italic;
+}
+
+
+/* Väder korten vid sökning*/
+
+.weather-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding: 1.5rem;
+    margin-top: 5rem;
+    width: 500px;
+    height: auto;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.location-name {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.current-temperature,
+.current-wind,
+.current-humidity,
+.current-time {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #555;
+    margin: 0.5rem 0; /* Lite mellanrum mellan varje rad */
+    padding-left: 1rem; /* För en enhetlig indragning */
+    position: relative;
+}
+
+.current-temperature:before,
+.current-wind:before,
+.current-humidity:before,
+.current-time:before {
+    content: '•';
+    color: #888;
+    font-size: 1.2rem;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }

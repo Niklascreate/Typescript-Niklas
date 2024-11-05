@@ -8,19 +8,25 @@
 </head>
 <body>
     <header class="header">
-        <a href="index.html" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+        <video autoplay loop muted playsinline class="header-video">
+            <source src="./cloudvideo.mp4" type="video/mp4">
+        </video>
+        <a href="index.html">
+            <h2 class="header-smallTitle">Welcome to</h2>
             <h1 class="header-title">Weathergenerator</h1>
         </a>
     </header>
     <nav class="nav-container">
         <ul>
-            <li><a href="weatherbank.html">Weatherbank</a></li>
+            <li class="weather-bankTitle"><a href="weatherbank.html">Weatherbank</a></li>
         </ul>
     </nav>
     <main>
         <section class="weather-wrapper">
-            <button id="SearchButton" class="weather-btn">Weathergenerator</button>
-            <input id="cityInput" placeholder="Search your city here" type="text" class="weather-input">
+            <article class="input-container">
+                <input id="cityInput" placeholder="Search your city here" type="text" class="weather-input">
+                <button id="SearchButton" class="weather-btn">Weathergenerate now</button>
+            </article>
             <article id="weatherContent" class="weather-content"></article>
         </section>
     </main>

@@ -48,20 +48,19 @@ function renderWeatherData(data: Weather): void {
     if (contentRef) {
         const { location, current } = data;
         contentRef.innerHTML = `
-            <h2>${location.name}, ${location.country}</h2>
-            <p>Temperatur: ${current.temperature}°C</p>
-            <p>Vindhastighet: ${current.wind_speed} km/h</p>
-            <p>Fuktighet: ${current.humidity}%</p>
-            <p>Observerad tid: ${current.observation_time}</p>
-            <button id="saveWeatherBtn" class="weather-btn">Spara till Weatherbank</button>
+            <h2 class="location-name">${location.name}, ${location.country}</h2>
+            <p class="current-temperature">Temperature: ${current.temperature}°C</p>
+            <p class="current-wind">Wind Speed: ${current.wind_speed} km/h</p>
+            <p class="current-humidity">Humidity: ${current.humidity}%</p>
+            <p class="current-time">Observation Time: ${current.observation_time}</p>
+            <button id="saveWeatherBtn" class="save-btn">Save city to Weatherbank</button>
         `;
 
-        // Lägg till event listener för "Spara" knappen
+        // Event listener för "Spara"-knappen
         const saveButton = document.querySelector('#saveWeatherBtn') as HTMLButtonElement;
         saveButton.addEventListener('click', () => saveToWeatherBank(location, current));
     }
 }
-
 function saveToWeatherBank(location: Location, current: CurrentWeather): void {
     const savedWeather: WeatherBankResponse[] = JSON.parse(localStorage.getItem('weatherBank') || '[]');
 
@@ -77,8 +76,8 @@ function saveToWeatherBank(location: Location, current: CurrentWeather): void {
         // Lägg till den nya väderinformationen i listan
         savedWeather.push(weatherData);
         localStorage.setItem('weatherBank', JSON.stringify(savedWeather));
-        alert(`${location.name} har sparats i Weatherbank!`);
+        alert(`${location.name} have been saved in Weatherbank!`);
     } else {
-        alert(`${location.name} finns redan i Weatherbank.`);
+        alert(`${location.name} Already in Weatherbank.`);
     }
 }

@@ -30,6 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
             contentRef.appendChild(weatherItem);
         });
     } else {
-        contentRef.innerHTML = '<p>Ingen väderdata sparad.</p>';
+        contentRef.innerHTML = '<p class="no-weather">No Weatherdata saved, go back and search.</p>';
     }
 });
