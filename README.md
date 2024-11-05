@@ -1,7 +1,4 @@
 # Typescript-Niklas
 Indivuduell uppgift i typecript.
 
-
-Random joke:  GET https://api.humorapi.com/jokes/random
-
-Random Meme: GET https://api.humorapi.com/memes/random
+key = fbcc6a07256c4c832d2facbc73645e52

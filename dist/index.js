@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,38 +7,51 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-let buttonRef = document.querySelector('#randomizeButton');
-buttonRef === null || buttonRef === void 0 ? void 0 : buttonRef.addEventListener('click', () => {
-    fetchRandomJoke();
+const API_KEY = 'fbcc6a07256c4c832d2facbc73645e52';
+const BASE_URL = 'https://api.weatherstack.com/current';
+document.addEventListener('DOMContentLoaded', () => {
+    // Ändra till rätt ID för knappen
+    const searchButton = document.querySelector('#SearchButton');
+    const cityInput = document.querySelector('#cityInput');
+    searchButton.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
+        const cityName = cityInput.value;
+        if (cityName) {
+            const weatherData = yield fetchWeather(cityName);
+            if (weatherData) {
+                renderWeatherData(weatherData);
+            }
+        }
+    }));
 });
-function fetchRandomJoke() {
+function fetchWeather(city) {
     return __awaiter(this, void 0, void 0, function* () {
-        const apiUrl = 'https://api.humorapi.com/jokes/random';
-        const apiKey = 'c622bc16f7a44bea9ec5b1b5f82431ac';
         try {
-            const response = yield fetch(`${apiUrl}?key=${apiKey}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            console.log('Response:', response);
+            const response = yield fetch(`${BASE_URL}?access_key=${API_KEY}&query=${city}`);
             if (!response.ok) {
-                throw new Error('Something went wrong, could not fetch the joke.');
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = yield response.json();
-            const contentRef = document.querySelector('#giggleContent');
-            if (contentRef) {
-                contentRef.innerText = data.joke;
+            if ('error' in data) {
+                throw new Error(data.error.info);
             }
+            return data; // Returnera väderdata
         }
         catch (error) {
-            if (error instanceof Error) {
-                console.error('Wrong:', error.message);
-            }
-            else {
-                console.error('Unknown error discovered');
-            }
+            console.error('Error fetching weather data:', error);
         }
     });
+}
+function renderWeatherData(data) {
+    const contentRef = document.querySelector('#weatherContent');
+    if (contentRef) {
+        const { location, current } = data;
+        contentRef.innerHTML = `
+            <h2>Väder i ${location.name}, ${location.country}</h2>
+            <p><strong>Temperatur:</strong> ${current.temperature}°C</p>
+            <p><strong>Beskrivning:</strong> ${current.weather_descriptions.join(', ')}</p>
+            <p><strong>Vindhastighet:</strong> ${current.wind_speed} km/h</p>
+            <p><strong>Fuktighet:</strong> ${current.humidity}%</p>
+            <p><strong>Observerad tid:</strong> ${current.observation_time}</p>
+        `;
+    }
 }

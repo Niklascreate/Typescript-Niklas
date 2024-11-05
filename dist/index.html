@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>GiggleGenerator</title>
+    <title>WeatherGenerator</title>
 </head>
 <body>
     <header class="header">
-        <img class="header-icon" src="./logo.svg" alt="icon">
-        <h1 class="header-title">GiggleGenerator</h1>
+        <img class="header-icon" src="./weatherlogo.svg" alt="icon">
+        <h1 class="header-title">Weathergenerator</h1>
     </header>
     <nav class="nav-container">
         <ul>
-            <li><a href="index.html">GiggleGenerator</a></li>
-            <li><a href="gigglebank.html">Gigglebank</a></li>
+            <li><a href="index.html">Weathersearch</a></li>
+            <li><a href="weatherbank.html">Weatherbank</a></li>
         </ul>
     </nav>
     <main>
-        <section class="giggle-wrapper">
-            <button id="randomizeButton" class="giggle-btn">GiggleGenerator</button>
-            <article id="giggleContent" class="giggle-content"></article>
+        <section class="weather-wrapper">
+            <button id="SearchButton" class="weather-btn">Weathergenerator</button>
+            <input id="cityInput" placeholder="Search a city/country" type="text" class="weather-input">
+            <article id="weatherContent" class="weather-content"></article>
         </section>
     </main>
     <script src="./index.js"></script>

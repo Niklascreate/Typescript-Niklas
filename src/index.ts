@@ -1,34 +1,55 @@
-let buttonRef: HTMLButtonElement = document.querySelector('#randomizeButton') as HTMLButtonElement;
+import { Weather, ErrorResponse } from '../src/interfaces';
 
-buttonRef?.addEventListener('click', () => {
-    fetchRandomJoke();
+const API_KEY = 'fbcc6a07256c4c832d2facbc73645e52';
+const BASE_URL = 'https://api.weatherstack.com/current';
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Ändra till rätt ID för knappen
+    const searchButton = document.querySelector('#SearchButton') as HTMLButtonElement; 
+    const cityInput = document.querySelector('#cityInput') as HTMLInputElement;
+
+    searchButton.addEventListener('click', async () => {
+        const cityName = cityInput.value;
+        if (cityName) {
+            const weatherData = await fetchWeather(cityName);
+            if (weatherData) {
+                renderWeatherData(weatherData);
+            }
+        }
+    });
 });
 
-async function fetchRandomJoke(): Promise<void> {
-    const apiUrl: string = 'https://api.humorapi.com/jokes/random';
-    const apiKey: string = 'c622bc16f7a44bea9ec5b1b5f82431ac';
-
+async function fetchWeather(city: string): Promise<Weather | void> {
     try {
-        const response: Response = await fetch(`${apiUrl}?key=${apiKey}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        console.log('Response:', response);
+        const response = await fetch(`${BASE_URL}?access_key=${API_KEY}&query=${city}`);
+
         if (!response.ok) {
-            throw new Error('Something went wrong, could not fetch the joke.');
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data: { joke: string } = await response.json();
-        const contentRef: HTMLElement | null = document.querySelector('#giggleContent') as HTMLElement;
-        if (contentRef) {
-            contentRef.innerText = data.joke;
+
+        const data: Weather | ErrorResponse = await response.json();
+        if ('error' in data) {
+            throw new Error(data.error.info);
         }
-    } catch (error: unknown) {
-        if (error instanceof Error) {
-            console.error('Wrong:', error.message);
-        } else {
-            console.error('Unknown error discovered');
-        }
+        
+        return data; // Returnera väderdata
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
+
+function renderWeatherData(data: Weather): void {
+    const contentRef = document.querySelector('#weatherContent') as HTMLElement;
+
+    if (contentRef) {
+        const { location, current } = data;
+        contentRef.innerHTML = `
+            <h2>Väder i ${location.name}, ${location.country}</h2>
+            <p><strong>Temperatur:</strong> ${current.temperature}°C</p>
+            <p><strong>Beskrivning:</strong> ${current.weather_descriptions.join(', ')}</p>
+            <p><strong>Vindhastighet:</strong> ${current.wind_speed} km/h</p>
+            <p><strong>Fuktighet:</strong> ${current.humidity}%</p>
+            <p><strong>Observerad tid:</strong> ${current.observation_time}</p>
+        `;
     }
 }
