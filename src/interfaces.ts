@@ -1,16 +1,27 @@
+interface Location {
+    name: string;
+    country: string;
+    region: string;
+}
+
+interface CurrentWeather {
+    temperature: number;
+    weather_descriptions: string[];
+    humidity: number;
+    wind_speed: number;
+    observation_time: string;
+}
+
 interface Weather {
-    location: {
-        name: string;
-        country: string;
-        region: string;
-    };
-    current: {
-        temperature: number;
-        weather_descriptions: string[];
-        humidity: number;
-        wind_speed: number;
-        observation_time: string;
-    };
+    location: Location;
+    current: CurrentWeather;
+}
+
+interface WeatherBankResponse {
+    name: string;
+    country: string;
+    temperature: number;
+    weatherDescription: string;
 }
 
 interface ErrorResponse {
@@ -21,5 +32,4 @@ interface ErrorResponse {
     };
 }
 
-
-export { Weather, ErrorResponse };
+export { Location, CurrentWeather, Weather, WeatherBankResponse, ErrorResponse };

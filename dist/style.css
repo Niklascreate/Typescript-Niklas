@@ -125,3 +125,34 @@ main {
                 0px 4px 10px rgba(0, 0, 0, 0.2);
     transform: scale(1.2)
 }
+
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#savedWeatherContent {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    
+}
+
+.weather-card {
+    width: 200px;
+    height: 200px;
+    background-image: url(../dist/weather-cardImg.jpg);
+    background-size: cover; /* eller contain */
+    background-position: center;
+    background-repeat: no-repeat; /* Förhindrar upprepning av bakgrundsbilden */
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), 
+    0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+.weather-card:hover {
+    transform: scale(1.05);
+}
