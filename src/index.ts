@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
 async function fetchWeather(city: string): Promise<Weather | void> {
     try {
         const response = await fetch(`${BASE_URL}?access_key=${API_KEY}&query=${city}`);
@@ -63,10 +62,9 @@ function renderWeatherData(data: Weather): void {
             <p class="current-wind">Wind Speed: ${current.wind_speed} km/h</p>
             <p class="current-humidity">Humidity: ${current.humidity}%</p>
             <p class="current-time">Observation Time: ${current.observation_time}</p>
-            <button id="saveWeatherBtn" class="save-btn">Save city to Weatherbank</button>
+            <button id="saveWeatherBtn" class="save-btn">Save place to Weatherbank</button>
         `;
 
-        // Event listener för "Spara"-knappen
         const saveButton = document.querySelector('#saveWeatherBtn') as HTMLButtonElement;
         saveButton.addEventListener('click', () => saveToWeatherBank(location, current));
     }
