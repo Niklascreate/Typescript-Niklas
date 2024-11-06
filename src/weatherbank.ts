@@ -1,35 +1,32 @@
-import { WeatherBankResponse } from '../src/interfaces';
+import { WeatherBankResponse } from "interfaces";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const contentRef = document.querySelector('#savedWeatherContent') as HTMLElement;
+document.addEventListener('DOMContentLoaded', () => { 
+    const contentRef = document.querySelector('#savedWeatherContent') as HTMLElement | null;
+    if (!contentRef) return;
 
-    // Hämta sparad väderdata
     const savedWeather: WeatherBankResponse[] = JSON.parse(localStorage.getItem('weatherBank') || '[]');
-    console.log('Sparad väderdata:', savedWeather);
 
     if (savedWeather.length > 0) {
-        savedWeather.forEach(entry => {
+        savedWeather.forEach((entry: WeatherBankResponse) => {
             const weatherItem = document.createElement('div');
-            weatherItem.className = 'weather-card';  // Lägg till en klass för kortet
+            weatherItem.className = 'weather-card';
             weatherItem.innerHTML = `
                 <h2 class="weather-location">${entry.name}, ${entry.country}</h2>
-                <p class="weather-temperature">Temperature: ${entry.temperature}°C</p>
-                <p class="weather-description">Description: ${entry.weatherDescription}</p>
+                <p class="weather-temperature"><strong>Temperature:</strong> ${entry.temperature}°C</p>
+                <p class="weather-description"><strong>Description:</strong> ${entry.weatherDescription}</p>
+                <p class="weather-wind"><strong>Wind Speed:</strong> ${entry.wind_speed} km/h</p>
+                <p class="weather-humidity"><strong>Humidity:</strong> ${entry.humidity}%</p>
+                <p class="weather-time"><strong>Observation Time:</strong> ${entry.observation_time}</p>
             `;
 
-            // Lägg till click-eventlistener för att ta bort kortet
             weatherItem.addEventListener('click', () => {
-                // Ta bort väderkortet från localStorage
                 const updatedWeather = savedWeather.filter(item => item.name !== entry.name);
                 localStorage.setItem('weatherBank', JSON.stringify(updatedWeather));
-                
-                // Ta bort kortet från DOM
-                contentRef.removeChild(weatherItem);
+                if (contentRef) contentRef.removeChild(weatherItem);
             });
-
             contentRef.appendChild(weatherItem);
         });
     } else {
-        contentRef.innerHTML = '<p class="no-weather">No Weatherdata saved, go back and search.</p>';
+        contentRef.innerHTML = '<p class="no-weather">No Weather data saved, go back and search.</p>';
     }
 });

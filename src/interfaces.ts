@@ -22,6 +22,9 @@ interface WeatherBankResponse {
     country: string;
     temperature: number;
     weatherDescription: string;
+    humidity: number;
+    wind_speed: number;
+    observation_time: string;
 }
 
 interface ErrorResponse {

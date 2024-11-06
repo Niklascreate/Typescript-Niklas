@@ -1,12 +1,22 @@
 import { Location, CurrentWeather, Weather, ErrorResponse, WeatherBankResponse } from '../src/interfaces';
 
-const API_KEY = 'fbcc6a07256c4c832d2facbc73645e52';
+const API_KEY = 'ab65f288711882703ee086db2c5b75ce';
 const BASE_URL = 'https://api.weatherstack.com/current';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const searchButton = document.querySelector('#SearchButton') as HTMLButtonElement; 
+    const searchButton = document.querySelector('#SearchButton') as HTMLButtonElement;
     const cityInput = document.querySelector('#cityInput') as HTMLInputElement;
+    const notification = document.querySelector('#notification') as HTMLElement;
+
     
+    const showNotification = (message: string, success: boolean = false): void => {
+        notification.textContent = message;
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 3000);
+    };
+
     searchButton.addEventListener('click', async () => {
         const cityName = cityInput.value;
         if (cityName) {
@@ -14,10 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (weatherData) {
                 renderWeatherData(weatherData);
             } else {
-                alert('Could not fetch weather data. Please check the city name and try again.');
+                showNotification('Could not fetch weather data. Please check the city name and try again.', false);
             }
         } else {
-            alert('Please enter a city name to fetch weather data.');
+            showNotification('Please enter a city name to fetch weather data.', false);
         }
     });
 });
@@ -64,20 +74,35 @@ function renderWeatherData(data: Weather): void {
 function saveToWeatherBank(location: Location, current: CurrentWeather): void {
     const savedWeather: WeatherBankResponse[] = JSON.parse(localStorage.getItem('weatherBank') || '[]');
 
-    // Kolla om staden redan finns i Weather Bank
     if (!savedWeather.some(entry => entry.name === location.name)) {
         const weatherData: WeatherBankResponse = {
             name: location.name,
             country: location.country,
             temperature: current.temperature,
             weatherDescription: current.weather_descriptions.join(', '),
+            humidity: current.humidity,
+            wind_speed: current.wind_speed,
+            observation_time: current.observation_time
         };
 
-        // Lägg till den nya väderinformationen i listan
         savedWeather.push(weatherData);
         localStorage.setItem('weatherBank', JSON.stringify(savedWeather));
-        alert(`${location.name} have been saved in Weatherbank!`);
+        showNotification(`${location.name} saved to Weatherbank!`);
     } else {
-        alert(`${location.name} Already in Weatherbank.`);
+        showNotification(`${location.name} already in Weatherbank.`);
     }
+}
+
+    function showNotification(message: string): void {
+        const notification = document.getElementById('notification');
+        if (!notification) return;
+    
+        notification.textContent = message;
+        notification.classList.remove('hidden');
+        notification.classList.add('visible');
+    
+        setTimeout(() => {
+            notification.classList.remove('visible');
+            notification.classList.add('hidden');
+        }, 3000);
 }
