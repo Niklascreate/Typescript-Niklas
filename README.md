@@ -6,6 +6,7 @@ Indivuduell uppgift i typecript.
 ### "target": "ES6", 
 =```` Kompilatorn kommer att kompilera koden till JavaScript ES6. ````
 
+<br>
 
 ### "module": "ES6",
 =````Kompilatorn kommer att skapa JavaScript-moduler enligt ES6-standarden, vilket betyder att den använder import och export för att hantera moduler.````
