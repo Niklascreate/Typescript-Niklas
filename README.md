@@ -1,7 +1,7 @@
 # Typescript-Niklas
 Indivuduell uppgift i typecript.
 
-#Beksrivning av tsconfig.json.#
+# Beksrivning av tsconfig.json.#
 
 ###"target": "ES6", = ```` Kompilatorn kommer att kompilera koden till JavaScript ES6. ````
 
