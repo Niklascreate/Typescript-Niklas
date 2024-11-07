@@ -3,7 +3,7 @@ Indivuduell uppgift i typecript.
 
 # Beksrivning av tsconfig.json.#
 
-### "target": "ES6", = ```` Kompilatorn kommer att kompilera koden till JavaScript ES6. ````
+### "target": "ES6", = #### ```` Kompilatorn kommer att kompilera koden till JavaScript ES6. ````
 
 ### "module": "ES6", = ````Kompilatorn kommer att skapa JavaScript-moduler enligt ES6-standarden, vilket betyder att den använder import och export för att hantera moduler.````
 
