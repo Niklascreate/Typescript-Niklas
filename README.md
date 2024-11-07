@@ -1,4 +1,5 @@
-![Projektets logo]([https://example.com/path/to/image.png](https://cdn.worldvectorlogo.com/logos/typescript.svg))
+![TypeScript logo](https://cdn.worldvectorlogo.com/logos/typescript.svg)
+
 
 
 # Typescript-Niklas
