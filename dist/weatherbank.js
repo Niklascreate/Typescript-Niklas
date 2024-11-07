@@ -28,4 +28,3 @@ document.addEventListener('DOMContentLoaded', () => {
         contentRef.innerHTML = '<p class="no-weather">No Weather data saved, go back and search.</p>';
     }
 });
-
