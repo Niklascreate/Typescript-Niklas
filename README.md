@@ -1,5 +1,4 @@
-![TypeScript logo](https://cdn.worldvectorlogo.com/logos/typescript.svg)
-
+<img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" alt="TypeScript logo" width="150" />
 
 
 # Typescript-Niklas
