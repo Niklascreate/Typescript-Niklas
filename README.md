@@ -3,8 +3,8 @@ Indivuduell uppgift i typecript.
 
 # Beksrivning av tsconfig.json.#
 
-### "target": "ES6", =
-```` Kompilatorn kommer att kompilera koden till JavaScript ES6. ````
+### "target": "ES6", 
+=```` Kompilatorn kommer att kompilera koden till JavaScript ES6. ````
 
 ### "module": "ES6", =
 ````Kompilatorn kommer att skapa JavaScript-moduler enligt ES6-standarden, vilket betyder att den använder import och export för att hantera moduler.````
@@ -27,10 +27,14 @@ Indivuduell uppgift i typecript.
 ### "strict": true, =
 ````Aktiverar alla strikta typkontroller i TypeScript, vilket gör koden säkrare och hjälper till att upptäcka fel tidigare.````
 
-### "strictNullChecks": true, = ````Förhindrar att null och undefined används där de inte är tillåtna.````
+### "strictNullChecks": true, =
+````Förhindrar att null och undefined används där de inte är tillåtna.````
 
-### "alwaysStrict": true, = ````Ser till att "use strict" alltid används i den genererade JavaScript-koden, vilket gör koden säkrare och fångar upp fler fel.````
+### "alwaysStrict": true, =
+````Ser till att "use strict" alltid används i den genererade JavaScript-koden, vilket gör koden säkrare och fångar upp fler fel.````
 
-### "skipLibCheck": true = ````Ser till att TypeScript hoppar över typkontrollen av externa bibliotek. Vilket kan snabba upp kompileringen.````
+### "skipLibCheck": true =
+````Ser till att TypeScript hoppar över typkontrollen av externa bibliotek. Vilket kan snabba upp kompileringen.````
 
-### "noUnusedLocals": true, = ````er till att felrapportera variabler som inte används i koden för att säkerställa att allt används.````
+### "noUnusedLocals": true, =
+````er till att felrapportera variabler som inte används i koden för att säkerställa att allt används.````
